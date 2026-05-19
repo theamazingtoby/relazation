@@ -78,14 +78,18 @@
   <p class="tagline">Slow Down. Be Quiet.</p>
 
   <script>
-    // Redirect after 5 seconds — break out of any iframe to redirect the whole page
+    // Fade out gently, then redirect
     setTimeout(function() {
-      try {
-        window.top.location.href = 'https://relazation.substack.com';
-      } catch(e) {
-        window.location.href = 'https://relazation.substack.com';
-      }
-    }, 5000);
+      document.body.style.transition = 'opacity 1.2s ease';
+      document.body.style.opacity = '0';
+      setTimeout(function() {
+        try {
+          window.top.location.href = 'https://relazation.substack.com';
+        } catch(e) {
+          window.location.href = 'https://relazation.substack.com';
+        }
+      }, 1200);
+    }, 7000);
   </script>
 
 </body>
