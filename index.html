@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relazation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F5F1EA;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    /* ── Breathing circle ── */
+    .breath {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 1.5px solid #C4B8AE;
+      margin: 0 auto 48px;
+      opacity: 0;
+      animation:
+        fadeInBreath 1s ease forwards 0.5s,
+        breathe 4s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes fadeInBreath {
+      to { opacity: 1; }
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1);   border-color: #C4B8AE; }
+      50%       { transform: scale(1.4); border-color: #A09080; }
+    }
+
+    /* ── "take a breath..." ── */
+    .prompt {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 400;
+      color: #2C2826;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards 1s;
+    }
+
+    /* ── tagline ── */
+    .tagline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #B0A89E;
+      margin-top: 28px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 2.8s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="breath"></div>
+  <p class="prompt">take a breath...</p>
+  <p class="tagline">Slow Down. Be Quiet.</p>
+
+  <script>
+    // Redirect after 5 seconds — break out of any iframe to redirect the whole page
+    setTimeout(function() {
+      try {
+        window.top.location.href = 'https://relazation.substack.com';
+      } catch(e) {
+        window.location.href = 'https://relazation.substack.com';
+      }
+    }, 5000);
+  </script>
+
+</body>
+</html>
