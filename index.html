@@ -493,9 +493,9 @@
       stroke-linejoin: round;
     }
 
-    .sound-btn .icon-muted { display: none; }
-    .sound-btn.playing .icon-sound { display: none; }
-    .sound-btn.playing .icon-muted { display: block; }
+    .sound-btn .icon-sound { display: none; }
+    .sound-btn.playing .icon-muted { display: none; }
+    .sound-btn.playing .icon-sound { display: block; }
 
     /* ── PRESET PANEL ── */
     .preset-panel {
@@ -822,7 +822,8 @@
 
     // ── Ambient sound ──
     let audioCtx   = null;
-    let masterGain = null;
+    let volumeGain = null; // fade in/out lives here — LFO never touches this
+    let masterGain = null; // LFO modulates this — sits above volumeGain
     let leftOsc    = null;
     let rightOsc   = null;
     let soundRunning = false;
@@ -839,9 +840,14 @@
       compressor.release.value   = 0.6;
       compressor.connect(audioCtx.destination);
 
+      // Chain: sources → masterGain (LFO tremolo) → volumeGain (fade) → compressor
+      volumeGain = audioCtx.createGain();
+      volumeGain.gain.value = 0; // starts silent; only fadeIn/fadeOut touch this
+      volumeGain.connect(compressor);
+
       masterGain = audioCtx.createGain();
-      masterGain.gain.value = 0;
-      masterGain.connect(compressor);
+      masterGain.gain.value = 1.0; // LFO adds ±0.06 around 1.0
+      masterGain.connect(volumeGain);
 
       // Slow LFO — gentle living pulse (~14s cycle, one breath)
       const lfo = audioCtx.createOscillator();
@@ -849,7 +855,7 @@
       const lfoDepth = audioCtx.createGain();
       lfoDepth.gain.value = 0.06;
       lfo.connect(lfoDepth);
-      lfoDepth.connect(masterGain.gain);
+      lfoDepth.connect(masterGain.gain); // modulates masterGain, not volumeGain
       lfo.start();
 
       // Helper: sine oscillator with pan
@@ -904,16 +910,16 @@
 
     function fadeIn() {
       const t = audioCtx.currentTime;
-      masterGain.gain.cancelScheduledValues(t);
-      masterGain.gain.setValueAtTime(masterGain.gain.value, t);
-      masterGain.gain.linearRampToValueAtTime(0.72, t + 4);
+      volumeGain.gain.cancelScheduledValues(t);
+      volumeGain.gain.setValueAtTime(volumeGain.gain.value, t);
+      volumeGain.gain.linearRampToValueAtTime(0.72, t + 4);
     }
 
     function fadeOut() {
       const t = audioCtx.currentTime;
-      masterGain.gain.cancelScheduledValues(t);
-      masterGain.gain.setValueAtTime(masterGain.gain.value, t);
-      masterGain.gain.linearRampToValueAtTime(0, t + 3);
+      volumeGain.gain.cancelScheduledValues(t);
+      volumeGain.gain.setValueAtTime(volumeGain.gain.value, t);
+      volumeGain.gain.linearRampToValueAtTime(0, t + 3);
     }
 
     // Switch binaural preset — smooth 2s glide so there's no click or jump
