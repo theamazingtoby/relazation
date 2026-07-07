@@ -1043,10 +1043,17 @@
     }
 
     // Play / pause
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       if (!soundRunning) {
         if (!audioCtx) buildAmbience();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
+        // Mobile Safari requires awaiting resume() before scheduling any audio
+        try {
+          if (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted') {
+            await audioCtx.resume();
+          }
+        } catch (e) {
+          console.warn('AudioContext resume failed:', e);
+        }
         fadeIn();
         soundRunning = true;
         btn.classList.add('playing');
@@ -1056,6 +1063,13 @@
         soundRunning = false;
         btn.classList.remove('playing');
         btn.setAttribute('aria-label', 'Play ambient sound');
+      }
+    });
+
+    // Mobile Safari suspends AudioContext when the page loses focus — resume on return
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState === 'visible' && soundRunning && audioCtx) {
+        try { await audioCtx.resume(); } catch (e) {}
       }
     });
 
