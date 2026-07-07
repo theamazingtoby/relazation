@@ -558,6 +558,35 @@
       font-style: italic;
     }
 
+    /* ── PRESET TOGGLE (mobile only, hidden on desktop) ── */
+    .preset-toggle {
+      display: none;
+      position: fixed;
+      bottom: 86px;
+      right: 32px;
+      z-index: 100;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(20, 20, 18, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 1.8s 3.5s ease forwards;
+    }
+
+    .preset-toggle svg {
+      width: 15px; height: 15px;
+      stroke: rgba(255,255,255,0.75);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
 
@@ -575,9 +604,9 @@
       section { padding: 64px 24px; }
       .quote-section { padding: 64px 24px; }
 
-      /* Image grids */
-      .image-grid { grid-template-columns: 1fr; height: auto; }
-      .image-grid-item { height: 240px; }
+      /* Hide both image grids — they stack and lose context on mobile */
+      .image-grid-section { display: none; }
+      .divider { display: none; }
 
       /* Pillars */
       .pillars { grid-template-columns: 1fr; padding: 48px 24px; gap: 36px; }
@@ -590,10 +619,19 @@
       footer { flex-direction: column; align-items: flex-start; padding: 40px 24px; gap: 20px; }
       .footer-links { flex-wrap: wrap; gap: 16px; }
 
-      /* Sound + preset panel — move to left so they don't crowd each other */
-      .preset-panel { right: auto; left: 16px; bottom: 88px; align-items: flex-start; }
-      .preset-btn { text-align: left; }
-      .sound-btn { right: 16px; bottom: 28px; }
+      /* Preset panel — hidden by default on mobile, toggled open */
+      .preset-panel {
+        display: none;
+        right: 80px;
+        bottom: 28px;
+        opacity: 1;
+        animation: none;
+      }
+      .preset-panel.mobile-open { display: flex; }
+      .sound-btn { right: 32px; bottom: 28px; }
+
+      /* Show the toggle button on mobile */
+      .preset-toggle { display: flex; }
     }
 
     @media (max-width: 480px) {
@@ -603,9 +641,6 @@
       .pillars { padding: 40px 20px; }
       section { padding: 52px 20px; }
       .quote-section blockquote { font-size: 1.2rem; }
-      /* Preset panel full-width on very small screens */
-      .preset-panel { left: 12px; right: 70px; }
-      .preset-btn { width: 100%; }
     }
   </style>
 </head>
@@ -682,7 +717,7 @@
   </div>
 
   <!-- ── IMAGE GRID ── -->
-  <section class="wide">
+  <section class="wide image-grid-section">
     <div class="image-grid">
       <div class="image-grid-item">
         <img src="tired.jpg" alt="Runner resting" loading="lazy" />
@@ -734,7 +769,7 @@
   </section>
 
   <!-- ── SECOND IMAGE GRID ── -->
-  <section class="wide">
+  <section class="wide image-grid-section">
     <div class="image-grid">
       <div class="image-grid-item">
         <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=800&q=80&auto=format&fit=crop" alt="Still water surface" loading="lazy" />
@@ -793,6 +828,11 @@
     </button>
   </div>
 
+  <!-- ── PRESET TOGGLE (mobile only) ── -->
+  <button class="preset-toggle" id="presetToggle" aria-label="Sound options">
+    <i data-feather="sliders"></i>
+  </button>
+
   <!-- ── SOUND TOGGLE ── -->
   <button class="sound-btn" id="soundBtn" aria-label="Toggle ambient sound" title="Ambient sound">
     <!-- Speaker with waves -->
@@ -811,7 +851,24 @@
 
   <script>
     // ── Feather Icons ──
-    feather.replace({ class: 'pillar-icon' });
+    feather.replace();
+
+    // ── Preset panel mobile toggle ──
+    const presetToggle = document.getElementById('presetToggle');
+    const presetPanel  = document.getElementById('presetPanel');
+    if (presetToggle) {
+      presetToggle.addEventListener('click', () => {
+        presetPanel.classList.toggle('mobile-open');
+      });
+      // Close panel when a preset is selected on mobile
+      document.querySelectorAll('.preset-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            presetPanel.classList.remove('mobile-open');
+          }
+        });
+      });
+    }
 
     // ── Image carousel ──
     const imgs = document.querySelectorAll('.hero-bg img');
