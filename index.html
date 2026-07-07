@@ -239,6 +239,12 @@
 
     .section-body p + p { margin-top: 20px; }
 
+    /* Centered section header — eyebrow + heading only, body stays left */
+    .section-centered .section-eyebrow,
+    .section-centered .section-heading {
+      text-align: center;
+    }
+
     /* ── IMAGE GRID ── */
     .image-grid {
       display: grid;
@@ -304,7 +310,7 @@
     .pillar-icon {
       display: block;
       width: 28px; height: 28px;
-      margin-bottom: 20px;
+      margin: 0 auto 20px;
       stroke: var(--teal);
       stroke-width: 1.2;
       fill: none;
@@ -317,6 +323,7 @@
       text-transform: uppercase;
       color: var(--teal);
       margin-bottom: 12px;
+      text-align: center;
     }
 
     .pillar-body {
@@ -699,7 +706,7 @@
   </section>
 
   <!-- ── OPENING ── -->
-  <section>
+  <section class="section-centered">
     <p class="section-eyebrow">What This Is</p>
     <h2 class="section-heading">Not a cure. A practice.</h2>
     <div class="section-body">
@@ -784,7 +791,7 @@
   </section>
 
   <!-- ── CLOSING ── -->
-  <section>
+  <section class="section-centered">
     <p class="section-eyebrow">Begin Anywhere</p>
     <h2 class="section-heading">Four seconds in.<br />Eight seconds out.</h2>
     <div class="section-body">
