@@ -1,0 +1,107 @@
+{
+  "brand_name": "Relazation",
+  "tagline": "Slow down. Be quiet.",
+  "duality": {
+    "amber": "Ancient practice",
+    "sea": "modern evidence"
+  },
+  "intro": "Techniques the monks, sages, and Stoics kept for two thousand years \u2014 now measurable in a nervous system near you. Not a cure. A practice.\n",
+  "hero_actions": [
+    {
+      "label": "Start with the cards",
+      "url": "#shop",
+      "style": "ember"
+    },
+    {
+      "label": "Read the essays",
+      "url": "https://relazation.substack.com",
+      "style": "void"
+    }
+  ],
+  "social": [
+    {
+      "label": "Substack",
+      "url": "https://relazation.substack.com"
+    },
+    {
+      "label": "Medium",
+      "url": "https://medium.com/@relazation4u"
+    },
+    {
+      "label": "X",
+      "url": "https://x.com/relazation4u"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://instagram.com/relazation4u"
+    }
+  ],
+  "frieze": [
+    "The Physiological Sigh",
+    "Box Breathing",
+    "The 4\u20138 Breath",
+    "The Body Scan",
+    "The Extended Exhale",
+    "Naming the Weather"
+  ],
+  "quote": {
+    "text": "Nature does not hurry, yet everything is accomplished.",
+    "attribution": "Lao Tzu \u00b7 Tao Te Ching"
+  },
+  "footer": {
+    "copyright": "\u00a9 2026 Relazation \u00b7 relazation.com \u00b7 ancient practice, modern evidence",
+    "columns": [
+      {
+        "heading": "Read",
+        "links": [
+          {
+            "label": "Substack",
+            "url": "https://relazation.substack.com"
+          },
+          {
+            "label": "Medium",
+            "url": "https://medium.com/@relazation4u"
+          },
+          {
+            "label": "News",
+            "url": "#news"
+          }
+        ]
+      },
+      {
+        "heading": "Follow",
+        "links": [
+          {
+            "label": "X",
+            "url": "https://x.com/relazation4u"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://instagram.com/relazation4u"
+          },
+          {
+            "label": "YouTube",
+            "url": "#"
+          }
+        ]
+      },
+      {
+        "heading": "Shop",
+        "links": [
+          {
+            "label": "Card decks",
+            "url": "#shop"
+          },
+          {
+            "label": "Books",
+            "url": "#"
+          },
+          {
+            "label": "Etsy & Amazon",
+            "url": "#"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,1083 +1,255 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Relazation: Slow Down. Be Quiet.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200;0,8..60,300;0,8..60,400;1,8..60,200;1,8..60,300&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --teal:       #2E7D6E;
-      --teal-light: #4A9E8E;
-      --teal-pale:  #E8F4F1;
-      --sand:       #F5F0E8;
-      --stone:      #8C8577;
-      --ink:        #2C2922;
-      --fog:        rgba(232, 244, 241, 0.72);
-    }
-
-    html, body {
-      width: 100%; height: 100%;
-      background: var(--sand);
-      font-family: 'Source Serif 4', Georgia, serif;
-      color: var(--ink);
-      overflow-x: hidden;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    /* Full-bleed image carousel */
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-
-    .hero-bg img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 2.4s ease-in-out;
-      filter: saturate(0.75) brightness(0.82);
-    }
-
-    .hero-bg img.visible { opacity: 1; }
-
-    /* Soft gradient overlay */
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(
-        to bottom,
-        rgba(44, 41, 34, 0.08) 0%,
-        rgba(44, 41, 34, 0.22) 60%,
-        rgba(44, 41, 34, 0.52) 100%
-      );
-    }
-
-    /* ── ENSO ── */
-    .enso-wrap {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      animation: fadeUp 2.2s ease forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .enso-svg {
-      width: 120px; height: 120px;
-      animation: slowSpin 32s linear infinite;
-    }
-
-    @keyframes slowSpin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 200;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #fff;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.28);
-    }
-
-    .hero-tagline {
-      font-size: clamp(0.95rem, 2vw, 1.2rem);
-      font-weight: 300;
-      font-style: italic;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.82);
-      text-shadow: 0 1px 12px rgba(0,0,0,0.3);
-    }
-
-    /* ── BREATHING GUIDE ── */
-    .breath-wrap {
-      position: relative;
-      z-index: 2;
-      margin-top: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Container holds ring + label together; ring expands outward, label stays centered */
-    .breath-inner {
-      position: relative;
-      width: 100px; height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .breath-ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,0.55);
-      animation: breathe 12s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-      0%   { transform: scale(1);    opacity: 0.55; }
-      33%  { transform: scale(1.6);  opacity: 0.8;  }
-      66%  { transform: scale(1.6);  opacity: 0.7;  }
-      100% { transform: scale(1);    opacity: 0.55; }
-    }
-
-    .breath-label {
-      position: relative;
-      z-index: 1;
-      font-size: 0.65rem;
-      font-weight: 300;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      text-align: center;
-      line-height: 1.4;
-      width: 70px;
-      pointer-events: none;
-    }
-
-    /* ── SCROLL CUE ── */
-    .scroll-cue {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.45;
-      animation: scrollPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.45; transform: translateX(-50%) translateY(0); }
-      50%       { opacity: 0.7;  transform: translateX(-50%) translateY(5px); }
-    }
-
-    .scroll-cue span {
-      display: block;
-      width: 1px;
-      height: 42px;
-      background: rgba(255,255,255,0.55);
-    }
-
-    .scroll-cue p {
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-    }
-
-    /* ── CONTENT SECTIONS ── */
-    section {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 96px 32px;
-    }
-
-    section.wide {
-      max-width: 100%;
-      padding: 0;
-    }
-
-    .section-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 24px;
-    }
-
-    .section-heading {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 300;
-      line-height: 1.35;
-      color: var(--ink);
-      margin-bottom: 28px;
-    }
-
-    .section-body {
-      font-size: 1.05rem;
-      font-weight: 300;
-      line-height: 1.82;
-      color: #4A4540;
-    }
-
-    .section-body p + p { margin-top: 20px; }
-
-    /* Centered section header — eyebrow + heading only, body stays left */
-    .section-centered .section-eyebrow,
-    .section-centered .section-heading {
-      text-align: center;
-    }
-
-    /* ── IMAGE GRID ── */
-    .image-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      height: 480px;
-    }
-
-    .image-grid-item {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .image-grid-item img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: saturate(0.7) brightness(0.88);
-      transition: filter 0.8s ease, transform 0.8s ease;
-    }
-
-    .image-grid-item:hover img {
-      filter: saturate(0.9) brightness(0.95);
-      transform: scale(1.03);
-    }
-
-    .image-grid-item:nth-child(2) { grid-row: span 1; }
-
-    /* ── QUOTE ── */
-    .quote-section {
-      background: var(--teal-pale);
-      text-align: center;
-    }
-
-    .quote-section blockquote {
-      font-size: clamp(1.4rem, 2.8vw, 2rem);
-      font-weight: 200;
-      font-style: italic;
-      line-height: 1.55;
-      color: var(--teal);
-      max-width: 640px;
-      margin: 0 auto 20px;
-    }
-
-    .quote-section cite {
-      font-size: 0.8rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--stone);
-      font-style: normal;
-    }
-
-    /* ── PILLARS ── */
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
-      padding: 80px 64px;
-      background: var(--sand);
-      max-width: 100%;
-    }
-
-    .pillar-icon {
-      display: block;
-      width: 28px; height: 28px;
-      margin: 0 auto 20px;
-      stroke: var(--teal);
-      stroke-width: 1.2;
-      fill: none;
-    }
-
-    .pillar-title {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .pillar-body {
-      font-size: 0.96rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: #4A4540;
-    }
-
-    /* ── WIDE IMAGE ── */
-    .wide-image {
-      width: 100%;
-      height: 52vh;
-      min-height: 300px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .wide-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: saturate(0.65) brightness(0.8);
-      transform: scale(1.05);
-      transition: transform 12s ease;
-    }
-
-    .wide-image:hover img { transform: scale(1); }
-
-    .wide-image-caption {
-      position: absolute;
-      bottom: 32px; left: 48px;
-      font-size: 0.78rem;
-      font-weight: 300;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      padding: 56px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-
-    .footer-brand {
-      font-size: 1.1rem;
-      font-weight: 200;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .footer-tagline {
-      font-size: 0.78rem;
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(255,255,255,0.38);
-      letter-spacing: 0.1em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-    }
-
-    .footer-links a {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover { color: rgba(255,255,255,0.8); }
-
-    /* ── ENSO DIVIDER ── */
-    .divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 0;
-      opacity: 0.25;
-    }
-
-    .divider svg { width: 40px; height: 40px; }
-
-    /* ── TOP NAV ── */
-    .site-nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 36px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 100%);
-      pointer-events: none; /* let clicks through the gradient background */
-    }
-
-    .site-nav a {
-      pointer-events: all;
-      text-decoration: none;
-      color: rgba(255,255,255,0.75);
-      transition: color 0.3s;
-    }
-
-    .site-nav a:hover { color: #fff; }
-
-    .nav-brand {
-      font-size: 0.78rem;
-      font-weight: 300;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .nav-links a {
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    /* thin separator between links */
-    .nav-links a + a::before {
-      content: '·';
-      margin-right: 28px;
-      color: rgba(255,255,255,0.3);
-    }
-
-    /* ── SOUND BUTTON ── */
-    .sound-btn {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      z-index: 100;
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.28);
-      background: rgba(46, 125, 110, 0.52);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.35s, border-color 0.35s, transform 0.2s;
-      opacity: 0;
-      animation: fadeIn 1.8s 3.5s ease forwards;
-    }
-
-    @keyframes fadeIn { to { opacity: 1; } }
-
-    .sound-btn:hover {
-      background: rgba(46, 125, 110, 0.8);
-      transform: scale(1.08);
-    }
-
-    .sound-btn:active { transform: scale(0.96); }
-
-    .sound-btn svg {
-      width: 20px; height: 20px;
-      stroke: rgba(255,255,255,0.88);
-      fill: none;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .sound-btn .icon-sound { display: none; }
-    .sound-btn.playing .icon-muted { display: none; }
-    .sound-btn.playing .icon-sound { display: block; }
-
-    /* ── PRESET PANEL ── */
-    .preset-panel {
-      position: fixed;
-      bottom: 90px;
-      right: 24px;
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      opacity: 0;
-      animation: fadeIn 1.8s 3.5s ease forwards;
-    }
-
-    .preset-btn {
-      background: rgba(20, 20, 18, 0.52);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 9px 16px;
-      cursor: pointer;
-      text-align: right;
-      transition: background 0.28s, border-color 0.28s, transform 0.15s;
-      font-family: 'Source Serif 4', Georgia, serif;
-    }
-
-    .preset-btn:hover {
-      background: rgba(46, 125, 110, 0.48);
-      border-color: rgba(255,255,255,0.2);
-      transform: translateX(-3px);
-    }
-
-    .preset-btn.active {
-      background: rgba(46, 125, 110, 0.65);
-      border-color: rgba(255,255,255,0.28);
-    }
-
-    .preset-name {
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.88);
-    }
-
-    .preset-sub {
-      display: block;
-      font-size: 0.58rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.42);
-      margin-top: 2px;
-      font-style: italic;
-    }
-
-    /* ── PRESET TOGGLE (mobile only, hidden on desktop) ── */
-    .preset-toggle {
-      display: none;
-      position: fixed;
-      bottom: 86px;
-      right: 32px;
-      z-index: 100;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(20, 20, 18, 0.5);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeIn 1.8s 3.5s ease forwards;
-    }
-
-    .preset-toggle svg {
-      width: 15px; height: 15px;
-      stroke: rgba(255,255,255,0.75);
-      fill: none;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-
-      /* Nav — hide links on mobile, they're in the footer */
-      .nav-links { display: none; }
-      .site-nav { padding: 18px 24px; }
-
-      /* Hero */
-      .hero { min-height: 100svh; }
-      .enso-svg { width: 80px; height: 80px; }
-      .hero-title { letter-spacing: 0.12em; }
-      .breath-wrap { margin-top: 36px; }
-
-      /* Sections */
-      section { padding: 64px 24px; }
-      .quote-section { padding: 64px 24px; }
-
-      /* Hide both image grids — they stack and lose context on mobile */
-      .image-grid-section { display: none; }
-      .divider { display: none; }
-
-      /* Pillars */
-      .pillars { grid-template-columns: 1fr; padding: 48px 24px; gap: 36px; }
-
-      /* Wide image */
-      .wide-image { height: 38vh; min-height: 220px; }
-      .wide-image-caption { left: 24px; bottom: 20px; }
-
-      /* Footer */
-      footer { flex-direction: column; align-items: flex-start; padding: 40px 24px; gap: 20px; }
-      .footer-links { flex-wrap: wrap; gap: 16px; }
-
-      /* Preset panel — hidden by default on mobile, toggled open */
-      .preset-panel {
-        display: none;
-        right: 80px;
-        bottom: 28px;
-        opacity: 1;
-        animation: none;
-      }
-      .preset-panel.mobile-open { display: flex; }
-      .sound-btn { right: 32px; bottom: 28px; }
-
-      /* Show the toggle button on mobile */
-      .preset-toggle { display: flex; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title { font-size: 2rem; }
-      .hero-tagline { font-size: 0.85rem; }
-      .section-heading { font-size: 1.5rem; }
-      .pillars { padding: 40px 20px; }
-      section { padding: 52px 20px; }
-      .quote-section blockquote { font-size: 1.2rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relazation — Slow down. Be quiet.</title>
+<meta name="description" content="Ancient practice, modern evidence. Techniques, essays, and printed decks for the anxious mind.">
+<link rel="canonical" href="https://relazation.com/">
+<meta property="og:title" content="Relazation">
+<meta property="og:description" content="Ancient practice, modern evidence.">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Relazation" href="/feed.xml">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
+<nav class="nav">
+  <a class="nav-mark" href="/">
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M33.5 23.5A14 14 0 1 1 22 6.4" stroke="#3E9E8C" stroke-width="2.8" stroke-linecap="round"/></svg>
+    <span>Relazation</span>
+  </a>
+  <div class="nav-links">
+    <a href="https://relazation.substack.com">Read</a>
+    <a href="/#news">News</a>
+    <a href="/#library">Library</a>
+    <a href="/#shop" class="shop-link">Shop</a>
+  </div>
+</nav>
 
-  <!-- ── TOP NAV ── -->
-  <nav class="site-nav">
-    <a class="nav-brand" href="#">Relazation</a>
-    <div class="nav-links">
-      <a href="https://relazation.substack.com" target="_blank" rel="noopener">Substack</a>
-      <a href="https://medium.com/@relazation4u" target="_blank" rel="noopener">Medium</a>
-      <a href="https://x.com/relazation4u" target="_blank" rel="noopener">X</a>
-      <a href="https://instagram.com/relazation4u" target="_blank" rel="noopener">Instagram</a>
-    </div>
-  </nav>
-
-  <!-- ── HERO ── -->
-  <section class="hero wide">
-    <div class="hero-bg">
-      <!-- Calm nature imagery via Unsplash (free, no API key needed for these static URLs) -->
-      <img class="visible" src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=1800&q=80&auto=format&fit=crop" alt="Misty forest morning" />
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80&auto=format&fit=crop" alt="Mountain lake at dawn" />
-      <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1800&q=80&auto=format&fit=crop" alt="Quiet ocean shore" />
-      <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=1800&q=80&auto=format&fit=crop" alt="Bamboo forest path" />
-      <img src="https://images.unsplash.com/photo-1552083375-1447ce886485?w=1800&q=80&auto=format&fit=crop" alt="Still water with rocks" />
-    </div>
-    <div class="hero-overlay"></div>
-
+<header class="hero">
+  <canvas id="mist" aria-hidden="true"></canvas>
+  <div class="hero-inner">
     <div class="enso-wrap">
-      <!-- Enso circle SVG -->
-      <svg class="enso-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M60 8 C88 8, 112 32, 112 60 C112 88, 88 112, 60 112 C38 112, 18 98, 12 78"
-          stroke="rgba(255,255,255,0.75)"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          fill="none"
-        />
+      <svg class="enso" viewBox="0 0 150 150" fill="none" aria-hidden="true">
+        <path class="stroke-main" d="M124 90a52 52 0 1 1-42-64" stroke="#3E9E8C" stroke-width="7" stroke-linecap="round"/>
+        <path class="stroke-amber" d="M82 26a52 52 0 0 1 38 30" stroke="#C47A1C" stroke-width="6" stroke-linecap="round"/>
       </svg>
-
-      <h1 class="hero-title">Relazation</h1>
-      <p class="hero-tagline">Slow Down. Be Quiet.</p>
-    </div>
-
-    <div class="breath-wrap">
-      <div class="breath-inner">
-        <div class="breath-ring"></div>
-        <p class="breath-label">Breathe</p>
+      <div class="breath-cue" aria-hidden="true">
+        <span class="in-cue">Breathe in</span>
+        <span class="out-cue">Breathe out</span>
       </div>
     </div>
-
-    <div class="scroll-cue">
-      <p>scroll</p>
-      <span></span>
+    <h1 class="rise r1">Relazation</h1>
+    <p class="tagline rise r2">Slow down. Be quiet.</p>
+    <p class="duality rise r3"><b>Ancient practice</b> &#160;&#183;&#160; <i>modern evidence</i></p>
+    <p class="intro rise r4">Techniques the monks, sages, and Stoics kept for two thousand years — now measurable in a nervous system near you. Not a cure. A practice.
+</p>
+    <div class="hero-actions rise r5">
+      <a class="btn btn-ember" href="#shop">Start with the cards</a><a class="btn btn-void" href="https://relazation.substack.com">Read the essays</a>
     </div>
-  </section>
-
-  <!-- ── OPENING ── -->
-  <section class="section-centered">
-    <p class="section-eyebrow">What This Is</p>
-    <h2 class="section-heading">Not a cure. A practice.</h2>
-    <div class="section-body">
-      <p>Anxiety is not a character flaw or a malfunction. It is a nervous system doing exactly what it was designed to do: responding to threat, bracing for harm, trying to keep you alive. The problem is not the response. The problem is that the response never gets to finish.</p>
-      <p>Relazation is about learning to complete the cycle. To let the body return. Not through willpower or positive thinking, but through small, consistent practices grounded in physiology, philosophy, and a few thousand years of accumulated human wisdom.</p>
-      <p>You don't have to conquer anxiety. You just have to live with it better than you did yesterday.</p>
+    <div class="social-row rise r5">
+      <a href="https://relazation.substack.com">Substack</a><a href="https://medium.com/@relazation4u">Medium</a><a href="https://x.com/relazation4u">X</a><a href="https://instagram.com/relazation4u">Instagram</a>
     </div>
-  </section>
-
-  <!-- ── DIVIDER ── -->
-  <div class="divider">
-    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 3 C30 3, 37 10, 37 20 C37 30, 30 37, 20 37 C12 37, 5 32, 3 25" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
   </div>
+</header>
 
-  <!-- ── IMAGE GRID ── -->
-  <section class="wide image-grid-section">
-    <div class="image-grid">
-      <div class="image-grid-item">
-        <img src="tired.jpg" alt="Runner resting" loading="lazy" />
-      </div>
-      <div class="image-grid-item">
-        <img src="meditating_rocks_water.jpg" alt="Meditation" loading="lazy" />
-      </div>
-      <div class="image-grid-item">
-        <img src="triumphant.jpg" alt="Standing at the edge" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PILLARS ── -->
-  <section class="wide">
-    <div class="pillars">
-      <div class="pillar">
-        <i data-feather="activity" class="pillar-icon"></i>
-        <p class="pillar-title">The What</p>
-        <p class="pillar-body">Chronic nervous system dysregulation is the problem. Allostatic load, researchers call it. Not a bad attitude. Not weakness. A body that has been activated too long and returned too rarely.</p>
-      </div>
-      <div class="pillar">
-        <i data-feather="wind" class="pillar-icon"></i>
-        <p class="pillar-title">The Way</p>
-        <p class="pillar-body">Breath, movement, cold, ceremony, stillness, community. Some are direct interventions. Some are the quality of light in a room. All of them help. You don't need all of them. You need a few that are yours.</p>
-      </div>
-      <div class="pillar">
-        <i data-feather="compass" class="pillar-icon"></i>
-        <p class="pillar-title">The Why</p>
-        <p class="pillar-body">For the people who would rather figure it out themselves first. Who understand that clinical help is the right call and still won't make that call. This is not a replacement. It's a starting point.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── WIDE IMAGE ── -->
-  <section class="wide">
-    <div class="wide-image">
-      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1800&q=80&auto=format&fit=crop" alt="Forest path in morning light" loading="lazy" />
-      <span class="wide-image-caption">The path is the practice</span>
-    </div>
-  </section>
-
-  <!-- ── QUOTE ── -->
-  <section class="quote-section">
-    <blockquote>
-      "To the mind that is still,<br />the whole universe surrenders."
-    </blockquote>
-    <cite>Lao Tzu</cite>
-  </section>
-
-  <!-- ── SECOND IMAGE GRID ── -->
-  <section class="wide image-grid-section">
-    <div class="image-grid">
-      <div class="image-grid-item">
-        <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=800&q=80&auto=format&fit=crop" alt="Still water surface" loading="lazy" />
-      </div>
-      <div class="image-grid-item">
-        <img src="https://images.unsplash.com/photo-1531804055935-76f44d7c3621?w=800&q=80&auto=format&fit=crop" alt="Morning mist mountains" loading="lazy" />
-      </div>
-      <div class="image-grid-item">
-        <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=800&q=80&auto=format&fit=crop" alt="Ocean at dusk" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CLOSING ── -->
-  <section class="section-centered">
-    <p class="section-eyebrow">Begin Anywhere</p>
-    <h2 class="section-heading">Four seconds in.<br />Eight seconds out.</h2>
-    <div class="section-body">
-      <p>That is the dose. It is not a metaphor. Extending the exhale activates the vagus nerve, engages the cholinergic anti-inflammatory pathway, and begins the return. You don't need to understand the mechanism to feel the effect. But knowing something real is happening tends to make it easier to do.</p>
-      <p>Five times a day. Three months for measurable systemic change. That is the research talking, not the hope.</p>
-      <p>Start there. The rest will arrive in its own time.</p>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div>
-      <p class="footer-brand">Relazation</p>
-      <p class="footer-tagline">Slow Down. Be Quiet.</p>
-    </div>
-    <nav class="footer-links">
-      <a href="https://relazation.substack.com" target="_blank" rel="noopener">Substack</a>
-      <a href="https://medium.com/@relazation4u" target="_blank" rel="noopener">Medium</a>
-      <a href="https://x.com/relazation4u" target="_blank" rel="noopener">X</a>
-      <a href="https://instagram.com/relazation4u" target="_blank" rel="noopener">Instagram</a>
-    </nav>
-  </footer>
-
-  <!-- ── PRESET PANEL ── -->
-  <div class="preset-panel" id="presetPanel">
-    <button class="preset-btn" data-preset="0">
-      <span class="preset-name">Sleep</span>
-      <span class="preset-sub">delta · deep restoration</span>
-    </button>
-    <button class="preset-btn" data-preset="1">
-      <span class="preset-name">Rest</span>
-      <span class="preset-sub">theta · the dreaming edge</span>
-    </button>
-    <button class="preset-btn active" data-preset="2">
-      <span class="preset-name">Unwind</span>
-      <span class="preset-sub">alpha · the calm return</span>
-    </button>
-    <button class="preset-btn" data-preset="3">
-      <span class="preset-name">Settle</span>
-      <span class="preset-sub">alpha · quiet alertness</span>
-    </button>
+<div class="frieze" aria-hidden="true">
+  <div class="frieze-track">
+    
+    <span>The Physiological Sigh <b class="fd">&#9679;</b> Box Breathing <b class="fd sea">&#9679;</b> The 4–8 Breath <b class="fd">&#9679;</b> The Body Scan <b class="fd sea">&#9679;</b> The Extended Exhale <b class="fd">&#9679;</b> Naming the Weather <b class="fd sea">&#9679;</b></span>
+    
+    <span>The Physiological Sigh <b class="fd">&#9679;</b> Box Breathing <b class="fd sea">&#9679;</b> The 4–8 Breath <b class="fd">&#9679;</b> The Body Scan <b class="fd sea">&#9679;</b> The Extended Exhale <b class="fd">&#9679;</b> Naming the Weather <b class="fd sea">&#9679;</b></span>
+    
   </div>
+</div>
 
-  <!-- ── PRESET TOGGLE (mobile only) ── -->
-  <button class="preset-toggle" id="presetToggle" aria-label="Sound options">
-    <i data-feather="sliders"></i>
-  </button>
+<section>
+  <div class="section-head reveal">
+    <span class="label">Begin anywhere</span>
+    <h2>Three Ways In</h2>
+  </div>
+  <div class="paths">
+    <div class="tablet reveal d1">
+      <div class="numeral">一</div>
+      <h3>Read</h3>
+      <p>Long-form essays on rest, attention, and the unhurried mind — where the old texts meet the new neuroscience.</p>
+      <div class="t-note">Weekly · Substack &amp; Medium</div>
+      <a href="https://relazation.substack.com">Read the latest &#8594;</a>
+    </div>
+    <div class="tablet reveal d2">
+      <div class="numeral">二</div>
+      <h3>Practice</h3>
+      <p>Guided breathing, recordings, and free technique cards you can use in the next four minutes, wherever you are.</p>
+      <div class="t-note">Free · the library</div>
+      <a href="#library">Open the library &#8594;</a>
+    </div>
+    <div class="tablet reveal d3">
+      <div class="numeral">三</div>
+      <h3>Carry It</h3>
+      <p>Printed decks, field guides, and workbooks — two millennia of technique, pocket-sized and evidence-noted.</p>
+      <div class="t-note">Print · the shop</div>
+      <a href="#shop" class="amber-link">Browse the shop &#8594;</a>
+    </div>
+  </div>
+</section>
 
-  <!-- ── SOUND TOGGLE ── -->
-  <button class="sound-btn" id="soundBtn" aria-label="Toggle ambient sound" title="Ambient sound">
-    <!-- Speaker with waves -->
-    <svg class="icon-sound" viewBox="0 0 24 24">
-      <path d="M11 5L6 9H3v6h3l5 4V5z"/>
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-    </svg>
-    <!-- Muted speaker -->
-    <svg class="icon-muted" viewBox="0 0 24 24">
-      <path d="M11 5L6 9H3v6h3l5 4V5z"/>
-      <line x1="23" y1="9" x2="17" y2="15"/>
-      <line x1="17" y1="9" x2="23" y2="15"/>
-    </svg>
-  </button>
 
-  <script>
-    // ── Feather Icons ──
-    feather.replace();
+<hr class="rule" />
 
-    // ── Preset panel mobile toggle ──
-    const presetToggle = document.getElementById('presetToggle');
-    const presetPanel  = document.getElementById('presetPanel');
-    if (presetToggle) {
-      presetToggle.addEventListener('click', () => {
-        presetPanel.classList.toggle('mobile-open');
-      });
-      // Close panel when a preset is selected on mobile
-      document.querySelectorAll('.preset-btn').forEach(b => {
-        b.addEventListener('click', () => {
-          if (window.innerWidth <= 768) {
-            presetPanel.classList.remove('mobile-open');
-          }
-        });
-      });
-    }
+<section class="shelf" id="shop">
+  <div class="section-head reveal">
+    <span class="label label-amber">From the shop</span>
+    <h2>The Practice, Printed</h2>
+    <p>Paper artifacts, made with the same care as the writing.</p>
+  </div>
+  
+  <div class="product">
+    <div class="paper-scene reveal d1">
+      <div class="paper" id="tiltcard">
+        <div class="card-face">
+          <span class="cat">Right now</span>
+          <div class="tname">The Physiological Sigh</div>
+          <div class="steps">Two short breaths in through the nose.<br/>One long breath out through the mouth.<br/>Repeat three times.</div>
+        </div>
+        <div class="sheen"></div>
+      </div>
+    </div>
+    <div class="product-info reveal d2">
+      <span class="eyebrow">Technique card deck</span>
+      <h3>Twelve techniques. Two minutes each.</h3>
+      <p>Six for right now, six for every day — on heavy matte cards. The front tells you what to do. The back tells you why it works, and which century it came from.
+</p>
+      <div class="product-actions">
+        <a class="btn btn-ember" href="#">Buy on Gumroad</a>
+        <a class="btn btn-void" href="/downloads/technique-cards-sample.pdf">Download 3 free cards</a>
+      </div>
+      <p class="price">$14 · PDF & print-at-home</p>
+    </div>
+  </div>
+  
+</section>
 
-    // ── Image carousel ──
-    const imgs = document.querySelectorAll('.hero-bg img');
-    let current = 0;
-    setInterval(() => {
-      imgs[current].classList.remove('visible');
-      current = (current + 1) % imgs.length;
-      imgs[current].classList.add('visible');
-    }, 7000);
 
-    // ── Breathing phase labels ──
-    const label = document.querySelector('.breath-label');
-    const phases = [
-      { text: 'Breathe in',  duration: 4000 },
-      { text: 'Hold',        duration: 4000 },
-      { text: 'Breathe out', duration: 8000 },
-      { text: '',            duration: 400  },
-    ];
-    let phase = 0;
-    function runPhase() {
-      label.textContent = phases[phase].text;
-      const next = phases[phase].duration;
-      phase = (phase + 1) % phases.length;
-      setTimeout(runPhase, next);
-    }
-    setTimeout(runPhase, 1200);
 
-    // ── Subtle parallax on wide image ──
-    const wideImg = document.querySelector('.wide-image img');
-    if (wideImg) {
-      window.addEventListener('scroll', () => {
-        const rect = wideImg.closest('.wide-image').getBoundingClientRect();
-        const offset = rect.top / window.innerHeight;
-        wideImg.style.transform = `scale(1.05) translateY(${offset * 20}px)`;
-      }, { passive: true });
-    }
+<hr class="rule" />
 
-    // ── Binaural presets ──
-    // Base tone: 174 Hz (left ear, fixed)
-    // Right ear = base + beat frequency → creates the binaural beat inside the listener's head
-    const BASE_FREQ = 174;
-    const presets = [
-      { beat: 2  }, // Sleep  — delta, 2 Hz
-      { beat: 5  }, // Rest   — theta, 5 Hz
-      { beat: 10 }, // Unwind — alpha, 10 Hz  (default)
-      { beat: 12 }, // Settle — alpha, 12 Hz
-    ];
-    let currentPreset = 2; // Unwind
+<section id="news">
+  <div class="section-head reveal">
+    <span class="label label-amber">News</span>
+    <h2>From the Studio</h2>
+    <p>Announcements, launches, and what's coming next.</p>
+  </div>
+  
+  <a class="news-row reveal" href="/blog/2026-07-17-technique-cards-launch/">
+    <span class="news-date">Jul 17</span>
+    <span class="news-title">The technique cards are here<small>Twelve techniques, two minutes each — the first Relazation deck is out now.</small></span>
+  </a>
+  
+  <a class="news-row reveal d1" href="/blog/2026-07-02-anxiety-first-aid-booklet-review/">
+    <span class="news-date">Jul 02</span>
+    <span class="news-title">The Anxiety First Aid booklet enters review<small>Sixteen pages for the worst twenty minutes of your day. Shipping this summer.</small></span>
+  </a>
+  
+  <div class="news-more reveal d2"><a href="/blog/">All news &#8594;</a></div>
+</section>
 
-    // ── Ambient sound ──
-    let audioCtx   = null;
-    let volumeGain = null; // fade in/out lives here — LFO never touches this
-    let masterGain = null; // LFO modulates this — sits above volumeGain
-    let leftOsc    = null;
-    let rightOsc   = null;
-    let soundRunning = false;
-    const btn = document.getElementById('soundBtn');
 
-    function buildAmbience() {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-      const compressor = audioCtx.createDynamicsCompressor();
-      compressor.threshold.value = -18;
-      compressor.knee.value      = 6;
-      compressor.ratio.value     = 3;
-      compressor.attack.value    = 0.1;
-      compressor.release.value   = 0.6;
-      compressor.connect(audioCtx.destination);
+<hr class="rule" />
 
-      // Chain: sources → masterGain (LFO tremolo) → volumeGain (fade) → compressor
-      volumeGain = audioCtx.createGain();
-      volumeGain.gain.value = 0; // starts silent; only fadeIn/fadeOut touch this
-      volumeGain.connect(compressor);
+<section id="library">
+  <div class="section-head reveal">
+    <span class="label label-sea">The library</span>
+    <h2>Watch · Listen · Practice</h2>
+    <p>New recordings and videos as they're made.</p>
+  </div>
+  
+  <a class="media-row reveal" href="#">
+    <span class="media-kind">
+      
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 4.5l10 5.5-10 5.5z" fill="currentColor"/></svg>
+      
+    </span>
+    <span class="media-title">The 4–8 breath, guided<small>Video · YouTube</small></span>
+    <span class="media-len">6 min</span>
+  </a>
+  
+  <a class="media-row reveal d1" href="#">
+    <span class="media-kind">
+      
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 8v4M8 5v10M12 7v6M16 4v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      
+    </span>
+    <span class="media-title">Body scan for the end of the day<small>Recording · audio · headphones</small></span>
+    <span class="media-len">12 min</span>
+  </a>
+  
+  <a class="media-row reveal d2" href="#">
+    <span class="media-kind">
+      
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 4.5l10 5.5-10 5.5z" fill="currentColor"/></svg>
+      
+    </span>
+    <span class="media-title">Why rest is a skill<small>Video · YouTube</small></span>
+    <span class="media-len">9 min</span>
+  </a>
+  
+</section>
 
-      masterGain = audioCtx.createGain();
-      masterGain.gain.value = 1.0; // LFO adds ±0.06 around 1.0
-      masterGain.connect(volumeGain);
 
-      // Slow LFO — gentle living pulse (~14s cycle, one breath)
-      const lfo = audioCtx.createOscillator();
-      lfo.frequency.value = 0.07;
-      const lfoDepth = audioCtx.createGain();
-      lfoDepth.gain.value = 0.06;
-      lfo.connect(lfoDepth);
-      lfoDepth.connect(masterGain.gain); // modulates masterGain, not volumeGain
-      lfo.start();
+<div class="quote-band">
+  <span class="ghost" aria-hidden="true">道</span>
+  <span class="label reveal">A quiet thought</span>
+  <blockquote class="reveal d1">&#8220;Nature does not hurry, yet everything is accomplished.&#8221;</blockquote>
+  <span class="label label-sea reveal d2"><cite>Lao Tzu · Tao Te Ching</cite></span>
+</div>
 
-      // Helper: sine oscillator with pan
-      function addTone(freq, pan, vol) {
-        const osc  = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        const pan_ = audioCtx.createStereoPanner();
-        osc.type = 'sine';
-        osc.frequency.value = freq;
-        gain.gain.value = vol;
-        pan_.pan.value  = pan;
-        osc.connect(gain);
-        gain.connect(pan_);
-        pan_.connect(masterGain);
-        osc.start();
-        return osc;
-      }
-
-      // Binaural pair — left fixed, right carries the beat
-      leftOsc  = addTone(BASE_FREQ,                              -0.9, 0.38);
-      rightOsc = addTone(BASE_FREQ + presets[currentPreset].beat, 0.9, 0.38);
-
-      // Supporting tones — warmth and body
-      addTone(87,    0, 0.14); // sub octave
-      addTone(261,   0, 0.06); // soft harmonic 5th
-      addTone(175.5, 0, 0.10); // slight detune for chorus warmth
-
-      // Brown noise floor — distant wind / room tone
-      const bufLen   = audioCtx.sampleRate * 3;
-      const noiseBuf = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
-      const data     = noiseBuf.getChannelData(0);
-      let last = 0;
-      for (let i = 0; i < bufLen; i++) {
-        const white = Math.random() * 2 - 1;
-        last    = (last + 0.02 * white) / 1.02;
-        data[i] = last * 3.5;
-      }
-      const noise       = audioCtx.createBufferSource();
-      noise.buffer      = noiseBuf;
-      noise.loop        = true;
-      const noiseFilter = audioCtx.createBiquadFilter();
-      noiseFilter.type  = 'lowpass';
-      noiseFilter.frequency.value = 140;
-      noiseFilter.Q.value = 0.5;
-      const noiseGain   = audioCtx.createGain();
-      noiseGain.gain.value = 0.018;
-      noise.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      noiseGain.connect(masterGain);
-      noise.start();
-    }
-
-    function fadeIn() {
-      const t = audioCtx.currentTime;
-      volumeGain.gain.cancelScheduledValues(t);
-      volumeGain.gain.setValueAtTime(volumeGain.gain.value, t);
-      volumeGain.gain.linearRampToValueAtTime(0.72, t + 4);
-    }
-
-    function fadeOut() {
-      const t = audioCtx.currentTime;
-      volumeGain.gain.cancelScheduledValues(t);
-      volumeGain.gain.setValueAtTime(volumeGain.gain.value, t);
-      volumeGain.gain.linearRampToValueAtTime(0, t + 3);
-    }
-
-    // Switch binaural preset — smooth 2s glide so there's no click or jump
-    function applyPreset(index) {
-      currentPreset = index;
-      document.querySelectorAll('.preset-btn').forEach((b, i) => {
-        b.classList.toggle('active', i === index);
-      });
-      if (audioCtx && rightOsc) {
-        const t = audioCtx.currentTime;
-        rightOsc.frequency.setValueAtTime(rightOsc.frequency.value, t);
-        rightOsc.frequency.linearRampToValueAtTime(
-          BASE_FREQ + presets[index].beat, t + 2
-        );
-      }
-    }
-
-    // Play / pause
-    btn.addEventListener('click', async () => {
-      if (!soundRunning) {
-        if (!audioCtx) buildAmbience();
-        // Mobile Safari requires awaiting resume() before scheduling any audio
-        try {
-          if (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted') {
-            await audioCtx.resume();
-          }
-        } catch (e) {
-          console.warn('AudioContext resume failed:', e);
-        }
-        fadeIn();
-        soundRunning = true;
-        btn.classList.add('playing');
-        btn.setAttribute('aria-label', 'Mute ambient sound');
-      } else {
-        fadeOut();
-        soundRunning = false;
-        btn.classList.remove('playing');
-        btn.setAttribute('aria-label', 'Play ambient sound');
-      }
-    });
-
-    // Mobile Safari suspends AudioContext when the page loses focus — resume on return
-    document.addEventListener('visibilitychange', async () => {
-      if (document.visibilityState === 'visible' && soundRunning && audioCtx) {
-        try { await audioCtx.resume(); } catch (e) {}
-      }
-    });
-
-    // Preset buttons
-    document.querySelectorAll('.preset-btn').forEach((b, i) => {
-      b.addEventListener('click', () => applyPreset(i));
-    });
-  </script>
-
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="mark-row">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M33.5 23.5A14 14 0 1 1 22 6.4" stroke="#7FCBBC" stroke-width="2.8" stroke-linecap="round"/></svg>
+        <span class="hanko" title="breath">息</span>
+      </div>
+      <div class="wordmark">Relazation</div>
+      <p>Slow down. Be quiet.</p>
+    </div>
+    
+    
+    
+    
+    
+    <div class="foot-col">
+      <h4>Read</h4>
+      <a href="https://relazation.substack.com">Substack</a><a href="https://medium.com/@relazation4u">Medium</a><a href="#news">News</a>
+    </div>
+    
+    
+    
+    
+    
+    
+    <div class="foot-col">
+      <h4>Follow</h4>
+      <a href="https://x.com/relazation4u">X</a><a href="https://instagram.com/relazation4u">Instagram</a><a href="#">YouTube</a>
+    </div>
+    
+    
+    
+    
+    
+    
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <a href="#shop">Card decks</a><a href="#">Books</a><a href="#">Etsy & Amazon</a>
+    </div>
+    
+    
+  </div>
+  <div class="foot-note">© 2026 Relazation · relazation.com · ancient practice, modern evidence</div>
+</footer>
+<script src="/assets/js/site.js"></script>
 </body>
 </html>

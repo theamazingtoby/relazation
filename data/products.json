@@ -1,0 +1,31 @@
+[
+  {
+    "slug": "technique-cards",
+    "title": "Twelve techniques. Two minutes each.",
+    "eyebrow": "Technique card deck",
+    "blurb": "Six for right now, six for every day \u2014 on heavy matte cards. The front tells you what to do. The back tells you why it works, and which century it came from.\n",
+    "card_face": {
+      "category": "Right now",
+      "name": "The Physiological Sigh",
+      "steps": [
+        "Two short breaths in through the nose.",
+        "One long breath out through the mouth.",
+        "Repeat three times."
+      ]
+    },
+    "price": "$14 \u00b7 PDF & print-at-home",
+    "buy": [
+      {
+        "label": "Buy on Gumroad",
+        "url": "#"
+      }
+    ],
+    "free": [
+      {
+        "label": "Download 3 free cards",
+        "file": "downloads/technique-cards-sample.pdf"
+      }
+    ],
+    "status": "live"
+  }
+]
