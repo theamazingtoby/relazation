@@ -169,6 +169,23 @@
   }
   .social-row a:hover { color: var(--sea-deep); }
 
+  /* ── Email capture (quiet, not a hero CTA) ── */
+  .subscribe-line {
+    margin-top: 22px; font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .subscribe-line a {
+    margin-left: 8px; color: var(--sea-deep); text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-color: rgba(62, 158, 140, 0.4);
+  }
+  .subscribe-line a:hover { color: var(--sea); text-decoration-color: var(--sea); }
+  .foot-subscribe { margin-top: 16px; }
+  .foot-subscribe a {
+    font-family: var(--sans); font-size: 12.5px; font-weight: 600;
+    letter-spacing: 0.06em; color: #7FCBBC; text-decoration: none;
+  }
+  .foot-subscribe a:hover { color: #F9F5EF; }
+
   /* ── Frieze marquee ── */
   .frieze {
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
@@ -304,6 +321,25 @@
     color: var(--amber-deep); text-decoration: none;
   }
   @media (max-width: 560px) { .news-row { flex-direction: column; gap: 6px; } .news-date { width: auto; } }
+
+  /* ── Post article ── */
+  .post-header { text-align: center; margin-bottom: 20px; }
+  .post-title {
+    font-family: var(--display); font-weight: 500;
+    font-size: clamp(28px, 4.2vw, 44px); line-height: 1.2; letter-spacing: 0.06em;
+    margin: 12px 0 0; padding-left: 0.06em; color: var(--ink);
+  }
+  .post-body { max-width: 68ch; margin: 48px auto 0; font-size: 19px; color: var(--ink-dim); }
+  .post-body p { margin: 0 0 24px; }
+  .post-body a { color: var(--sea-deep); }
+  .post-body a:hover { color: var(--sea); }
+  .post-body h2, .post-body h3 { font-family: var(--display); color: var(--ink); margin: 40px 0 16px; }
+  .post-back { text-align: center; margin-top: 56px; }
+  .post-back a {
+    font-family: var(--sans); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--sea-deep);
+  }
+  .post-back a:hover { color: var(--sea); }
 
   /* ── Library ── */
   .media-row {
