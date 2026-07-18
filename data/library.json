@@ -1,13 +1,23 @@
 [
   {
-    "title": "Resonance Breathing \u2014 5 Minutes Guided",
-    "kind": "audio",
-    "subtitle": "Audio \u00b7 SoundCloud \u00b7 Headphones recommended",
-    "url": "https://soundcloud.com/relazation/resonance-breathing-5-minutes",
+    "title": "Resonance Breathing Exercise \u2014 5 Minutes Guided (5.5 Seconds In and Out)",
+    "kind": "video",
+    "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
+    "url": "https://youtu.be/aSk2kaErF7Y",
     "length": "5 min",
     "date": "2026-07-18",
     "blurb": "Inhale 5.5 seconds, exhale 5.5 seconds. Five minutes of resonance breathing over theta binaural beats.",
-    "status": "draft"
+    "status": "live"
+  },
+  {
+    "title": "Extended Exhale Breathing Exercise \u2014 5 Minutes Guided (Longer Out Than In)",
+    "kind": "video",
+    "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
+    "url": "https://youtu.be/wWctFk4s7VE",
+    "length": "5 min",
+    "date": "2026-07-18",
+    "blurb": "Breathe in for 4 seconds, out for 8. The longer exhale activates the vagus nerve and tells your body it's safe to stand down.",
+    "status": "live"
   },
   {
     "title": "The 4\u20138 breath, guided",
