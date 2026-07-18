@@ -2,6 +2,7 @@
   {
     "title": "Resonance Breathing Exercise \u2014 5 Minutes Guided (5.5 Seconds In and Out)",
     "kind": "video",
+    "category": "breathwork",
     "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
     "url": "https://youtu.be/c2RrvwJSWF0",
     "length": "5 min",
@@ -12,6 +13,7 @@
   {
     "title": "Extended Exhale Breathing Exercise \u2014 5 Minutes Guided (Longer Out Than In)",
     "kind": "video",
+    "category": "breathwork",
     "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
     "url": "https://youtu.be/EPITqgumzvE",
     "length": "5 min",
@@ -22,6 +24,7 @@
   {
     "title": "Box Breathing Exercise \u2014 5 Minutes Guided (4 Seconds In, Hold, Out, Hold)",
     "kind": "video",
+    "category": "breathwork",
     "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
     "url": "https://youtu.be/qYo8IbNdXa4",
     "length": "5 min",
@@ -32,6 +35,7 @@
   {
     "title": "4-7-8 Breathing Exercise \u2014 5 Minutes Guided (Inhale 4, Hold 7, Exhale 8)",
     "kind": "video",
+    "category": "breathwork",
     "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
     "url": "https://youtu.be/n670HFihF-o",
     "length": "5 min",
@@ -42,6 +46,7 @@
   {
     "title": "The 4\u20138 breath, guided",
     "kind": "video",
+    "category": "breathwork",
     "subtitle": "Video \u00b7 YouTube",
     "url": "#",
     "length": "6 min",
@@ -52,6 +57,7 @@
   {
     "title": "Body scan for the end of the day",
     "kind": "audio",
+    "category": "meditation",
     "subtitle": "Recording \u00b7 audio \u00b7 headphones",
     "url": "#",
     "length": "12 min",
@@ -62,6 +68,7 @@
   {
     "title": "Why rest is a skill",
     "kind": "video",
+    "category": "other",
     "subtitle": "Video \u00b7 YouTube",
     "url": "#",
     "length": "9 min",
