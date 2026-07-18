@@ -38,6 +38,10 @@
     {
       "label": "Pinterest",
       "url": "https://pinterest.com/relazation4u"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://youtube.com/@relazation1122"
     }
   ],
   "frieze": [
@@ -86,6 +90,10 @@
           {
             "label": "Pinterest",
             "url": "https://pinterest.com/relazation4u"
+          },
+          {
+            "label": "YouTube",
+            "url": "https://youtube.com/@relazation1122"
           }
         ]
       },
