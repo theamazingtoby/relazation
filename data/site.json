@@ -34,6 +34,10 @@
     {
       "label": "Instagram",
       "url": "https://instagram.com/relazation4u"
+    },
+    {
+      "label": "Pinterest",
+      "url": "https://pinterest.com/relazation4u"
     }
   ],
   "frieze": [
@@ -80,8 +84,8 @@
             "url": "https://instagram.com/relazation4u"
           },
           {
-            "label": "YouTube",
-            "url": "#"
+            "label": "Pinterest",
+            "url": "https://pinterest.com/relazation4u"
           }
         ]
       },
@@ -91,14 +95,6 @@
           {
             "label": "Card decks",
             "url": "/shop/"
-          },
-          {
-            "label": "Books",
-            "url": "#"
-          },
-          {
-            "label": "Etsy & Amazon",
-            "url": "#"
           }
         ]
       }
