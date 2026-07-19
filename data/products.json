@@ -4,15 +4,7 @@
     "title": "What to do right now.",
     "eyebrow": "Anxiety first-aid card",
     "blurb": "Six techniques on two sides of a card. Three for the moment you're in, three for building a calmer baseline. Print it, keep it somewhere you'll find it at 3am.\n",
-    "card_face": {
-      "category": "Right now",
-      "name": "The Physiological Sigh",
-      "steps": [
-        "Two short breaths in through the nose.",
-        "One long breath out through the mouth.",
-        "Repeat three times."
-      ]
-    },
+    "art": "images/anxiety-first-aid-preview.jpg",
     "price": "Free",
     "free": [
       {

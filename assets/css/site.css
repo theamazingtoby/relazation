@@ -278,6 +278,11 @@
     background: linear-gradient(170deg, #47A18D, #35836F);
     color: #F9F5EF; display: flex; flex-direction: column;
   }
+  .art-prop {
+    display: block; width: 100%; aspect-ratio: 5 / 7; border-radius: 4px;
+    object-fit: cover;
+  }
+  .product-info:only-child { grid-column: 1 / -1; }
   .card-face .cat {
     font-family: var(--sans); font-size: 10px; font-weight: 600;
     letter-spacing: 0.3em; text-transform: uppercase; color: #FFDFAE;
