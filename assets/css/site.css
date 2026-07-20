@@ -282,6 +282,12 @@
     display: block; width: 100%; aspect-ratio: 5 / 7; border-radius: 4px;
     object-fit: cover;
   }
+  /* `.paper`'s border/padding/cream background is a paper-mat frame built
+     for `.card-face` markup — a plain photo showed that mat as an unwanted
+     border around itself. Art variant fills the frame edge to edge instead;
+     `.paper`'s own border-radius + overflow:hidden still rounds the corners. */
+  .paper.paper-art { padding: 0; border: 0; }
+  .paper.paper-art .art-prop { border-radius: 0; }
   .product-info:only-child { grid-column: 1 / -1; }
   .card-face .cat {
     font-family: var(--sans); font-size: 10px; font-weight: 600;
