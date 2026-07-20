@@ -1,5 +1,20 @@
 [
   {
+    "slug": "technique-cards-preview",
+    "title": "Three techniques. Print them. Keep them close.",
+    "eyebrow": "Technique card deck \u2014 free preview",
+    "blurb": "The Physiological Sigh, Extended Exhale, and Resonance Breathing \u2014 on print-ready wallet cards. Front tells you what to do. Back tells you why it works. Free, no catch.\n",
+    "art": "images/technique-cards-thumb.png",
+    "price": "Free",
+    "free": [
+      {
+        "label": "Download 3 free cards",
+        "url": "https://relazation.gumroad.com/l/awntv"
+      }
+    ],
+    "status": "live"
+  },
+  {
     "slug": "anxiety-first-aid-card",
     "title": "What to do right now.",
     "eyebrow": "Anxiety first-aid card",
