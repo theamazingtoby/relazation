@@ -38,6 +38,7 @@
     "category": "breathwork",
     "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
     "url": "https://youtu.be/c2RrvwJSWF0",
+    "soundcloud_url": "https://soundcloud.com/relazation/resonance-breathing-5-minutes",
     "length": "5 min",
     "date": "2026-07-18",
     "blurb": "Inhale 5.5 seconds, exhale 5.5 seconds. Five minutes of resonance breathing over theta binaural beats.",
@@ -49,9 +50,55 @@
     "category": "breathwork",
     "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
     "url": "https://youtu.be/EPITqgumzvE",
+    "soundcloud_url": "https://soundcloud.com/relazation/extended-exhale-breathing",
     "length": "5 min",
     "date": "2026-07-18",
     "blurb": "Breathe in for 4 seconds, out for 8. The longer exhale activates the vagus nerve and tells your body it's safe to stand down.",
+    "status": "live"
+  },
+  {
+    "title": "Resonance Breathing Guide \u2014 10 Minutes (Theta Binaural Beats)",
+    "kind": "audio",
+    "category": "breathwork",
+    "subtitle": "Audio \u00b7 SoundCloud \u00b7 Headphones recommended",
+    "url": "https://soundcloud.com/relazation/resonance-breathing-guide",
+    "length": "10 min",
+    "date": "2026-07-27",
+    "blurb": "The full 10-minute resonance breathing guide, layered over theta binaural beats. No video yet \u2014 audio only for now.",
+    "status": "live"
+  },
+  {
+    "title": "Resonance Breathing Guide \u2014 10 Minutes (Alpha Binaural Beats)",
+    "kind": "audio",
+    "category": "breathwork",
+    "subtitle": "Audio \u00b7 SoundCloud \u00b7 Headphones recommended",
+    "url": "https://soundcloud.com/relazation/resonance-breathing-guide-1",
+    "length": "10 min",
+    "date": "2026-07-27",
+    "blurb": "The same 10-minute resonance breathing guide, layered over alpha binaural beats instead of theta \u2014 for practicing earlier in the day.",
+    "status": "live"
+  },
+  {
+    "title": "Bilateral Calming \u2014 60bpm, A Minor (15 Minutes)",
+    "kind": "video",
+    "category": "ambient",
+    "subtitle": "Video \u00b7 YouTube \u00b7 Headphones recommended",
+    "url": "https://youtu.be/rHm22caJVZU",
+    "soundcloud_url": "https://soundcloud.com/relazation/bilateral-calming-60bpm",
+    "length": "15 min",
+    "date": "2026-07-27",
+    "blurb": "A steady 60bpm bilateral tap under an ambient Am-F-C-G bed \u2014 bilateral stimulation for calming, not therapy.",
+    "status": "live"
+  },
+  {
+    "title": "Delta Sleep Music \u2014 2Hz Binaural Beats, A Minor (15 Minutes)",
+    "kind": "audio",
+    "category": "ambient",
+    "subtitle": "Audio \u00b7 SoundCloud \u00b7 Headphones recommended",
+    "url": "https://soundcloud.com/relazation/delta-sleep-music-2hz-binaural",
+    "length": "15 min",
+    "date": "2026-07-27",
+    "blurb": "Slow ambient music with delta binaural beats for deep rest and sleep. Nothing to do \u2014 just rest.",
     "status": "live"
   },
   {
