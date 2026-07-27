@@ -36,11 +36,18 @@
     frame(reduced ? 6000 : 0);
   }
 
+  // threshold is a fraction of the *target's own* height, not the viewport —
+  // a tall element (e.g. a full blog post body) can be taller than
+  // viewport_height / threshold, making that fraction mathematically
+  // unreachable while scrolling and leaving it stuck at opacity:0 forever.
+  // Shorter viewports (mobile Safari, especially with its address bar) hit
+  // this first. threshold: 0 fires as soon as any part is visible, which
+  // has no such ceiling.
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0, rootMargin: "0px 0px -10% 0px" });
   document.querySelectorAll(".reveal, .rule").forEach(function (el) { io.observe(el); });
 
   var card = document.getElementById("tiltcard");
