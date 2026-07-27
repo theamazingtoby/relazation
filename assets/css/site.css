@@ -345,6 +345,11 @@
   .post-body a { color: var(--sea-deep); }
   .post-body a:hover { color: var(--sea); }
   .post-body h2, .post-body h3 { font-family: var(--display); color: var(--ink); margin: 40px 0 16px; }
+  /* Substack's raw <img width="960" height="960"> attributes otherwise force
+     native size, overflowing the narrower post column instead of shrinking
+     to fit — this is what read as "the cover image is off to the right." */
+  .post-body img { max-width: 100%; height: auto; display: block; margin: 0 auto 24px; }
+  .post-body figure { margin: 0 0 24px; }
   .post-back { text-align: center; margin-top: 56px; }
   .post-back a {
     font-family: var(--sans); font-size: 12px; font-weight: 600;
