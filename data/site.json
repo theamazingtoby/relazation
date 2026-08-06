@@ -99,6 +99,15 @@
         ]
       },
       {
+        "heading": "Legal",
+        "links": [
+          {
+            "label": "Privacy Policy",
+            "url": "/privacy/"
+          }
+        ]
+      },
+      {
         "heading": "Shop",
         "links": [
           {
