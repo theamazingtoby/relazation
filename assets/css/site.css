@@ -373,6 +373,34 @@
   .technique-facts dt:first-child { margin-top: 0; }
   .technique-facts dd { margin: 4px 0 0; color: var(--ink-dim); }
 
+  /* ── Koans ── */
+  .koan-list { list-style: none; margin: 0; padding: 0; max-width: 62ch; }
+  .koan-list li {
+    font-family: var(--manuscript); font-size: 20px; font-style: italic;
+    line-height: 1.7; color: var(--ink); margin: 0 0 34px; padding: 0;
+  }
+  .koan-list li:last-child { margin-bottom: 0; }
+  .koan-list cite {
+    display: block; margin-top: 6px; font-family: var(--sans); font-style: normal;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em; color: var(--ink-faint);
+  }
+
+  /* ── Quiet prompt (homepage rotating koan/journal-prompt widget) ── */
+  .quiet-prompt {
+    max-width: 640px; margin: 0 auto 72px; padding: 0 28px; text-align: center;
+  }
+  .quiet-prompt .label { display: block; margin-bottom: 16px; }
+  .quiet-prompt p {
+    font-family: var(--manuscript); font-style: italic; font-size: 21px;
+    color: var(--ink-dim); line-height: 1.65; margin: 0 0 16px; min-height: 1.65em;
+  }
+  .quiet-prompt-refresh {
+    background: none; border: none; font-family: var(--sans); font-size: 11.5px;
+    font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--ink-faint); cursor: pointer; padding: 4px 0; border-bottom: 1px solid transparent;
+  }
+  .quiet-prompt-refresh:hover { color: var(--sea-deep); border-bottom-color: var(--sea); }
+
   /* ── Library ── */
   .library-category { margin-top: 48px; }
   .library-category:first-child { margin-top: 0; }

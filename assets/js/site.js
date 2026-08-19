@@ -65,4 +65,30 @@
       card.style.animation = "";
     });
   }
+
+  // Rotating prompt/koan widget (homepage) — brief-koans-qigong-rotating-
+  // prompt.md: "rotates on page load," random is fine, small refresh
+  // button to cycle without reloading. Label swaps to match what's
+  // actually shown rather than one generic label for both content types.
+  var promptDataEl = document.getElementById("quiet-prompt-data");
+  if (promptDataEl) {
+    var promptItems = JSON.parse(promptDataEl.textContent || "[]");
+    var promptLabelEl = document.getElementById("quiet-prompt-label");
+    var promptTextEl = document.getElementById("quiet-prompt-text");
+    var promptRefreshBtn = document.getElementById("quiet-prompt-refresh");
+    var lastIndex = -1;
+    var showRandomItem = function () {
+      if (!promptItems.length) return;
+      var i = Math.floor(Math.random() * promptItems.length);
+      if (promptItems.length > 1 && i === lastIndex) {
+        i = (i + 1) % promptItems.length;
+      }
+      lastIndex = i;
+      var item = promptItems[i];
+      promptLabelEl.textContent = item.type === "koan" ? "Sit With This" : "Today's Prompt";
+      promptTextEl.textContent = item.attribution ? item.text + " — " + item.attribution : item.text;
+    };
+    showRandomItem();
+    if (promptRefreshBtn) promptRefreshBtn.addEventListener("click", showRandomItem);
+  }
 })();
