@@ -1,11 +1,26 @@
 [
   {
-    "slug": "journal-prompt-labels",
+    "slug": "journal-prompt-labels-evergreen",
     "title": "Prompts you can stick right in the journal you already have.",
     "eyebrow": "Journal prompt labels \u2014 peel & stick",
-    "blurb": "14 anxiety journal prompts on peel-and-stick labels, sized to sit across the top of a page like a headline, not down the middle of one. Print at home on a standard address-label sheet and stick one into any journal you already own and like.\n",
-    "art": "images/journal-prompt-labels-thumb.png",
-    "price": "$TBD \u00b7 PDF, print-at-home",
+    "blurb": "28 anxiety journal prompts on peel-and-stick labels, sized to sit across the top of a page like a headline, not down the middle of one. Print at home on a standard address-label sheet and stick one into any journal you already own and like.\n",
+    "art": "images/journal-prompt-labels-evergreen-thumb.png",
+    "price": "$6 \u00b7 PDF, print-at-home",
+    "buy": [
+      {
+        "label": "Buy on Gumroad",
+        "url": "#"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "journal-prompt-labels-fall",
+    "title": "Prompts you can stick right in the journal you already have.",
+    "eyebrow": "Journal prompt labels \u2014 fall scrollwork",
+    "blurb": "The same 28 anxiety journal prompts as the Evergreen pack, framed in hand-picked fall scrollwork -- pumpkins and maple leaves. Print at home on a standard address-label sheet and stick one into any journal you already own and like.\n",
+    "art": "images/journal-prompt-labels-fall-thumb.png",
+    "price": "$6 \u00b7 PDF, print-at-home",
     "buy": [
       {
         "label": "Buy on Gumroad",
