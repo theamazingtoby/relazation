@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /pinterest-oauth-callback/
+
+Sitemap: https://relazation.com/sitemap.xml
