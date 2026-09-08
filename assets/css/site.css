@@ -340,7 +340,9 @@
     font-size: clamp(28px, 4.2vw, 44px); line-height: 1.2; letter-spacing: 0.06em;
     margin: 12px 0 0; padding-left: 0.06em; color: var(--ink);
   }
-  .post-body { max-width: 68ch; margin: 48px auto 0; font-size: 19px; color: var(--ink-dim); }
+  .post-cover { max-width: 68ch; margin: 32px auto 0; }
+  .post-cover img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .post-body { max-width: 68ch; margin: 40px auto 0; font-size: 19px; color: var(--ink-dim); }
   .post-body p { margin: 0 0 24px; }
   .post-body a { color: var(--sea-deep); }
   .post-body a:hover { color: var(--sea); }
